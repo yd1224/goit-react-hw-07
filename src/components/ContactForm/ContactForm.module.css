@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ddd; /* Add border with a light gray color */
+  padding: 15px; /* Add padding for a better visual appearance */
+}
+
+.input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.btn {
+  max-width: 200px;
+  margin: auto;
+  margin-top: 10px;
+}
+.err {
+  color: rgb(205, 78, 78);
+  font-size: 13px;
+}
