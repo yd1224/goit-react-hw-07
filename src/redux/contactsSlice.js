@@ -1,15 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { nanoid } from "nanoid";
 
 const contactsSlice = createSlice({
   name: "contacts",
-  initialState: [
-    { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-    { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-    { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-    { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  ],
+  initialState: {
+    items: [],
+    loading: false,
+    error: false,
+  },
   reducers: {
+    fetchPending(state, action) {
+      state.error = false;
+      state.loading = true;
+    },
+    fetchSuccess(state, action) {
+      state.error = false;
+      state.loading = false;
+      state.items.push(...action.payload);
+    },
+    fetchError(state, action) {
+      state.error = true;
+      state.loading = false;
+    },
     deleteContact: (state, action) => {
       const index = state.findIndex((contact) => contact.id === action.payload);
       state.splice(index, 1);
@@ -29,5 +42,29 @@ const contactsSlice = createSlice({
     },
   },
 });
-export const { deleteContact, addContact } = contactsSlice.actions;
+export const {
+  deleteContact,
+  addContact,
+  fetchPending,
+  fetchSuccess,
+  fetchError,
+} = contactsSlice.actions;
+export const FetchContacts = (controller) => async (dispatch) => {
+  try {
+    dispatch(fetchPending());
+    const options = {
+      signal: controller,
+    };
+    const response = await axios.get(
+      "https://65d789d327d9a3bc1d7b4592.mockapi.io/contacts",
+      options
+    );
+    dispatch(fetchSuccess(response.data));
+    console.log("response", response);
+  } catch (error) {
+    if (error.code !== "ERR_CANCELED") {
+      dispatch(fetchError());
+    }
+  }
+};
 export const contactsReducer = contactsSlice.reducer;

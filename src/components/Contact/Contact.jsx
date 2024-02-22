@@ -3,7 +3,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { deleteContact } from "../../redux/contactsSlice";
 import { useDispatch } from "react-redux";
-export const Contact = ({ user: { name, number, id } }) => {
+export const Contact = ({ user: { name, phone, id } }) => {
   const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContact(id));
   return (
@@ -15,7 +15,7 @@ export const Contact = ({ user: { name, number, id } }) => {
         </div>
         <div className={css.wrapper}>
           <FaPhoneAlt size={20} />
-          <p className={css.label}>{number}</p>
+          <p className={css.label}>{phone}</p>
         </div>
       </div>
 
