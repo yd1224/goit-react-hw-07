@@ -3,18 +3,12 @@ import { SearchBox } from "./components/SearchBox/SearchBox";
 import { ContactForm } from "./components/ContactForm/ContactForm";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { FetchContacts, fetchPending } from "./redux/contactsSlice";
+import { FetchContacts } from "./redux/operations";
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    dispatch(FetchContacts(controller.signal));
-
-    return () => {
-      controller.abort();
-    };
+    dispatch(FetchContacts());
   }, [dispatch]);
 
   return (

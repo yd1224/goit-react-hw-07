@@ -20,7 +20,6 @@ export const SearchBox = () => {
         id={userId}
         onChange={(evt) => {
           handleFilterChange(evt);
-          console.log(evt.target.value);
         }}
       />
     </div>
