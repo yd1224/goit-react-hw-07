@@ -2,31 +2,16 @@ import { Contact } from "../Contact/Contact";
 import css from "./ContactList.module.css";
 import { useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
-const getVisibleContacts = (contacts, inputValue) => {
-  return contacts.filter((contact) => {
-    const nameWords = contact.name.toLowerCase();
-    const searchTermArray = inputValue.toLowerCase().split(" ");
-    if (
-      searchTermArray.every(
-        (word) =>
-          nameWords.split(" ").includes(word) ||
-          nameWords.split(" ").some((a) => a.startsWith(word))
-      )
-    ) {
-      return true;
-    }
-  });
-};
+import {
+  selectLoading,
+  selectError,
+  selectVisibleContacts,
+} from "../../redux/selectors";
 
 export const ContactList = ({ onDelete }) => {
-  const contacts = useSelector((state) => state.contacts.items);
-
-  const loading = useSelector((state) => state.contacts.loading);
-  const error = useSelector((state) => state.contacts.error);
-
-  const inputValue = useSelector((state) => state.filters.name);
-
-  const visibleContacts = getVisibleContacts(contacts, inputValue);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const visibleContacts = useSelector(selectVisibleContacts);
 
   return (
     <>
@@ -51,7 +36,7 @@ export const ContactList = ({ onDelete }) => {
               <Contact user={contact} onDelete={onDelete} />
             </li>
           );
-        })}{" "}
+        })}
       </ul>
     </>
   );

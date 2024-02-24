@@ -79,3 +79,11 @@ ul {
 p {
   margin: 0px;
 }
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.num {
+  padding-right: 45px;
+}
