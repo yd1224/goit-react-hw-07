@@ -8,7 +8,7 @@ import {
   selectVisibleContacts,
 } from "../../redux/selectors";
 
-export const ContactList = ({ onDelete }) => {
+export const ContactList = ({ handleScroll }) => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const visibleContacts = useSelector(selectVisibleContacts);
@@ -33,7 +33,7 @@ export const ContactList = ({ onDelete }) => {
         {visibleContacts.map((contact) => {
           return (
             <li className={css.list} key={contact.id}>
-              <Contact user={contact} onDelete={onDelete} />
+              <Contact user={contact} onhandleScroll={handleScroll} />
             </li>
           );
         })}

@@ -1,0 +1,28 @@
+.box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 80%;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  color: rgba(255, 255, 255, 0.87) !important;
+  padding-bottom: 30px;
+}
+.btn1 {
+  background-color: rgb(47, 206, 84);
+}
+.btn2 {
+  background-color: #d72020;
+}
+.wrapper {
+  display: flex;
+  gap: 30px;
+}

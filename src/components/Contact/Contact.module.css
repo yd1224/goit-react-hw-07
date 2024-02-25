@@ -18,3 +18,15 @@
   gap: 10px;
   flex-direction: column;
 }
+.delete {
+  color: #d72020;
+}
+.change {
+  color: #eb9a0bed;
+}
+.wrapper2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}

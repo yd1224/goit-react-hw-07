@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FetchContacts, deleteContact, addContact } from "./operations";
+import {
+  FetchContacts,
+  deleteContact,
+  addContact,
+  changeContact,
+} from "./operations";
 // import { nanoid } from "nanoid";
 
 const contactsSlice = createSlice({
@@ -38,6 +43,14 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
+      })
+      .addCase(changeContact.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          (contact) => contact.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       }),
 });
 export const contactsReducer = contactsSlice.reducer;
