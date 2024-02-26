@@ -10,7 +10,7 @@ import { useRef } from "react";
 // Use forwardRef properly to forward the ref
 const ContactForm = forwardRef(({ flag, id, setFlag }, ref) => {
   const btnRef = useRef();
-  console.log("id", id);
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const contactSchema = Yup.object().shape({
@@ -36,19 +36,18 @@ const ContactForm = forwardRef(({ flag, id, setFlag }, ref) => {
   useEffect(() => {
     if (flag === "change") {
       const contact = contacts.find((item) => item.id === id);
-      console.dir(btnRef.current);
+
       btnRef.current.innerText = "Save changes";
       if (contact) {
         setName(contact.name);
         setPhone(contact.phone);
-        console.log(name, phone);
       }
     } else {
       // Reset initial values if flag is not "change"
       setName("");
       setPhone("");
     }
-  }, [flag, id, contacts]);
+  }, [flag, id, contacts, name, phone]);
 
   return (
     <>
@@ -104,5 +103,5 @@ const ContactForm = forwardRef(({ flag, id, setFlag }, ref) => {
     </>
   );
 });
-
+ContactForm.displayName = "ContactForm";
 export default ContactForm;

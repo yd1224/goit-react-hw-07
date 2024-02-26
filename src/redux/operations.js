@@ -29,15 +29,14 @@ export const addContact = createAsyncThunk(
   "contacts/add",
   async (contact, thunkAPI) => {
     try {
-      console.log(contact.values);
       const { name, phone } = contact.values;
       const contacts = contact.contacts;
-      console.log(contact.contacts);
+
       const match = contacts.filter(
         (item) => item.name === name && item.phone === phone
       );
       if (match.length > 0) {
-        throw new Error("Contact already exists");
+        return thunkAPI.rejectWithValue("Contact already exists");
       }
       const response = await axios.post(`/contacts/`, {
         name: name,

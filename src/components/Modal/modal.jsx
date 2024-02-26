@@ -3,7 +3,7 @@ import css from "./modal.module.css";
 import { deleteContact } from "../../redux/operations";
 
 import { useDispatch } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 const customStyles = {
   content: {
     top: "50%",
@@ -60,7 +60,6 @@ export const ModalWindow = ({ isOpen, setIsOpen, id }) => {
           </button>
         </div>
       </Modal>
-      <Toaster position="top-right"></Toaster>
     </div>
   );
 };
